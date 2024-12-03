@@ -114,10 +114,5 @@
     {
         "src": "../assests/images/5.jpeg",
         "alt": "5.jpeg"
-    },
-    {
-        "src": "../assests/images/json_generation.py",
-        "alt": "json_generation.py"
     }
-
 ]
