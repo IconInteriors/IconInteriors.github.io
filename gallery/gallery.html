@@ -7,21 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="/dist/output.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4/dist/fancybox.css">
-    <style>
-        /* Override Fancybox default padding and margins to maximize image size */
-        .fancybox__container {
-            --fancybox-content-bg: transparent;
-            --fancybox-bg: rgba(0, 0, 0, 0.9);
-        }
-        .fancybox__content > .fancybox__image {
-            object-fit: cover; /* Ensure image fills the container */
-            max-width: 100vw;
-            max-height: 100vh;
-        }
-        .fancybox__content {
-            padding: 0; /* Remove padding around the image */
-        }
-    </style>
 </head>
 <body class="bg-gray-50">
     <header>
@@ -54,7 +39,7 @@
     <main class="container mx-auto mt-8 px-4">
         <h1 class="text-center text-3xl font-bold mb-6">Interior Design Gallery</h1>
         <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-    </main>
+    </main> 
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -68,7 +53,6 @@
                 menu.classList.toggle("hidden");
                 menuIcon.classList.toggle("hidden");
                 closeIcon.classList.toggle("hidden");
-                toggleButton.setAttribute("aria-expanded", menu.classList.contains("hidden") ? "false" : "true");
             });
 
             // Gallery Fetch and Fancybox Initialization
@@ -84,40 +68,13 @@
                         const img = document.createElement("img");
                         img.src = image.src;
                         img.alt = image.alt;
-                        img.className = "w-full h-auto aspect-[4/3] object-cover rounded-lg hover:opacity-80";
+                        img.className = "h-48 w-full object-cover rounded-lg hover:opacity-80";
 
                         anchor.appendChild(img);
                         galleryContainer.appendChild(anchor);
                     });
-
-                    // Initialize Fancybox with custom settings
-                    Fancybox.bind("[data-fancybox='gallery']", {
-                        Image: {
-                            fit: "cover", // Fill viewport, cropping if needed
-                            zoom: false, // Disable auto-zoom to prevent scaling issues
-                        },
-                        contentClick: "close", // Close on click outside image
-                        Toolbar: {
-                            display: [
-                                { id: "prev", position: "center" },
-                                { id: "next", position: "center" },
-                                "zoom",
-                                "close",
-                            ],
-                        },
-                        Thumbs: {
-                            autoStart: false, // Disable thumbnails for cleaner look
-                        },
-                        // Remove padding around content
-                        content: {
-                            padding: 0,
-                        },
-                    });
                 })
-                .catch(error => {
-                    console.error("Error loading gallery:", error);
-                    galleryContainer.innerHTML = '<p class="text-center text-red-500">Unable to load gallery. Please try again later.</p>';
-                });
+                .catch(error => console.error("Error loading gallery:", error));
         });
     </script>
 
